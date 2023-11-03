@@ -105,3 +105,5 @@ Dsrc/main/java/tn/esprit/rh/achat/repositories/ProduitRepository.java,3\5\35aa9
 Lsrc/main/java/tn/esprit/rh/achat/controllers/CategorieProduitController.java,c\1\c1a89e2c5d5f3966bce3e096d96c2d018b79d69f
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+e
+5src/test/java/tn/esprit/rh/achat/FournisseurTest.java,a\f\afe418a5e4b0952a0b67e331f812fe9f0123c4d4

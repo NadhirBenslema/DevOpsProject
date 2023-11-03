@@ -1,3 +1,5 @@
 
-…
-java:S1488G"cImmediately return this expression instead of assigning it to the temporary variable "fournisseur".(Œ„«Èþÿÿÿÿ8ø¢õ×¸1
+f
+java:S2259O"IA "NullPointerException" could be thrown; "fournisseur" is nullable here.(‰ž²õ8áš¬®¹1
+I
+java:S1905 "'Remove this unnecessary cast to "List".(óæË¸øÿÿÿÿ8êš¬®¹1
