@@ -25,14 +25,6 @@ pipeline {
         sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonarqube'
     }
 }
-stage('JaCoCo Code Coverage') {
-    steps {
-        sh 'mvn clean test jacoco:prepare-agent jacoco:report'
-        // Publish the JaCoCo coverage report
-        step([$class: 'JacocoPublisher', changeBuildStatus: true, execPattern: '**/target/jacoco.exec', classPattern: '**/target/classes', sourcePattern: '**/src/main/java', inclusionPattern: '**/*', exclusionPattern: '**/*Test*'])
-    }
-}
-
 
     }
     post {
