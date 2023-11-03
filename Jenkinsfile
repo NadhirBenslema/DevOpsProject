@@ -5,9 +5,6 @@ pipeline {
             steps {
                 checkout([$class: 'GitSCM',
                     branches: [[name: 'ameni']],
-                    doGenerateSubmoduleConfigurations: false,
-                    extensions: [[$class: 'CleanBeforeCheckout'], []],
-                    submoduleCfg: [],
                     userRemoteConfigs: [[url: 'https://github.com/AymenMzoughi/DevOpsProject.git']]
                 ])
             }
