@@ -10,9 +10,19 @@ pipeline {
                 ])
             }
         }
-        stage('Compilation du projet') {
+        stage('Maven Clean') {
             steps {
-                sh 'mvn clean compile'
+                sh 'mvn clean'
+            }
+        }
+        stage('Maven Compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('Maven SonarQube') {
+            steps {
+                sh 'mvn sonar:sonar'
             }
         }
     }
