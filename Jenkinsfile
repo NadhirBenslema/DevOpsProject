@@ -42,7 +42,7 @@ pipeline {
                 script {
                     def repoPath = "achat"
                     dir(repoPath) {
-                        withSonarQubeEnv(credentialsId: 'Secret text', installationName: 'sonar-10.2.1') {
+                        withSonarQubeEnv(credentialsId: 'jenkinsToken', installationName: 'sonar-10.2.1') {
                             sh 'mvn sonar:sonar'
                         }
                     }
