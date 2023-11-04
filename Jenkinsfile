@@ -13,7 +13,7 @@ pipeline {
         stage('Nettoyage du projet') {
             steps {
                 script {
-                    def repoPath = "src"
+                    def repoPath = "achat"
                     dir(repoPath) {
                         sh "mvn clean"
                     }
