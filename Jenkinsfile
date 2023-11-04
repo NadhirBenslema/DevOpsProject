@@ -13,7 +13,7 @@ pipeline {
         stage('Nettoyage du projet') {
             steps {
                 script {
-                    def repoPath = "DevOpsProject"
+                    def repoPath = "ZainebBouallagui"
                     dir(repoPath) {
                         sh "mvn clean"
                     }
