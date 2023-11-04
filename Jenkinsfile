@@ -37,6 +37,18 @@ pipeline {
                 }
             }
         }
+         stage('Code Quality Check via SonarQube') {
+            steps {
+                script {
+                    def repoPath = "achat"
+                    dir(repoPath) {
+                        withSonarQubeEnv(credentialsId: 'sonartoken', installationName: 'sonarserver') {
+                            sh 'mvn sonar:sonar'
+                        }
+                    }
+                }
+            }
+        }
         
     }
     post {
