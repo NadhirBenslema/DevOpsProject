@@ -20,6 +20,24 @@ pipeline {
                 }
             }
         }
+               stage('Unit Tests') {
+            steps {
+                script {
+                    def repoPath = "achat"
+                    sh "cd ${repoPath} && mvn test"
+                }  
+            }
+        }
+        
+        stage('Artifact Construction') {
+            steps {
+                script {
+                    def repoPath = "achat"
+                    sh "cd ${repoPath} && mvn package -DskipTests"
+                }
+            }
+        }
+        
     }
     post {
         success {
