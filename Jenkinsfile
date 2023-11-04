@@ -49,6 +49,13 @@ pipeline {
                 }
             }
         }
+          stage('Publish To Nexus') {
+            steps {
+                script {
+                    sh 'cd achat && mvn deploy'
+                }
+            }
+        }
         
     }
     post {
