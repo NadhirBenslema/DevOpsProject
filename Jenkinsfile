@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage('Récupération du code source') {
             steps {
-                
                 checkout([$class: 'GitSCM',
                     branches: [[name: 'ZainebBouallagui']],
                     userRemoteConfigs: [[url: 'https://github.com/AymenMzoughi/DevOpsProject.git']],
@@ -12,12 +11,15 @@ pipeline {
             }
         }
         stage('Nettoyage du projet') {
-             steps {
+            steps {
                 script {
                     def repoPath = "DevOpsProject"
-                    sh "cd ${repoPath} && mvn clean"
+                    dir(repoPath) {
+                        sh "mvn clean"
+                    }
                 }
             }
+        }
     }
     post {
         success {
