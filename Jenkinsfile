@@ -22,7 +22,28 @@ pipeline {
         }
        stage('Maven SonarQube') {
     steps {
-        sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
+        sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonarqube'
+    }
+}
+stage('Nexus Deployment') {
+    steps {
+        script {
+            def server = Artifactory.server 'nexus-server' // Configure your Nexus server in Jenkins
+            def buildInfo = server.newBuildInfo()
+
+            // Maven deployment configuration
+            def deployer = Artifactory.newMavenBuild()
+            deployer.tool = 'Maven' // Specify the Maven tool installation name
+            deployer.deployerServer = server
+            deployer.deployerRepo = 'deploymentRepo' // Use the repository ID from your pom.xml
+            deployer.deployerSnapshotRepo = 'deploymentRepo' // Use the same repository for snapshots
+
+            // Publish Maven artifacts
+            deployer.deployArtifacts(buildInfo)
+
+            // Publish build information to Nexus
+            server.publishBuildInfo buildInfo
+        }
     }
 }
 
