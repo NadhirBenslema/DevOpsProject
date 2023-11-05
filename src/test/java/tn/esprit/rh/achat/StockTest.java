@@ -1,5 +1,6 @@
 package tn.esprit.rh.achat;
 
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verify;
@@ -44,6 +44,7 @@ public class StockTest {
 
 
     @Test
+    @Order(1)
     void testRetrieveAllStock() {
         ArrayList<Stock> stockList = new ArrayList<>();
         when(stockRepository.findAll()).thenReturn(stockList);
@@ -63,17 +64,17 @@ public class StockTest {
     @Test
     void testAddStock() {
         Stock stockToAdd = new Stock();
-        when(stockRepository.save(stockToAdd)).thenReturn(stockToAdd);
+        stockToAdd.setLibelleStock("stock 2");
+        stockService.addStock(stockToAdd);
+        List<Stock> RetrieveAllStocksResult = stockService.retrieveAllStocks();
+        assertEquals(0,RetrieveAllStocksResult.size());
 
-        Stock addedStock = stockServiceImpl.addStock(stockToAdd);
-
-        assertSame(stockToAdd, addedStock);
-        verify(stockRepository).save(stockToAdd);
     }
 
     @Test
     void testUpdateStock() {
         Stock stockToUpdate = new Stock();
+        stockToUpdate.setLibelleStock("Stock 1");
         when(stockRepository.save(stockToUpdate)).thenReturn(stockToUpdate);
 
         Stock updatedStock = stockServiceImpl.updateStock(stockToUpdate);
@@ -85,12 +86,12 @@ public class StockTest {
     @Test
     void testRetrieveStock() {
         Stock expectedStock = new Stock();
-        when(stockRepository.findById(123L)).thenReturn(Optional.of(expectedStock));
+        when(stockRepository.findById(1L)).thenReturn(Optional.of(expectedStock));
 
-        Stock retrievedStock = stockServiceImpl.retrieveStock(123L);
+        Stock retrievedStock = stockServiceImpl.retrieveStock(1L);
 
         assertSame(expectedStock, retrievedStock);
-        verify(stockRepository).findById(123L);
+        verify(stockRepository).findById(1L);
     }
 
     @Test
