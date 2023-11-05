@@ -20,15 +20,15 @@ pipeline {
                 }
             }
         }
-               stage('Unit Tests') {
+        stage('Unit Tests') {
             steps {
                 script {
                     def repoPath = "achat"
                     sh "cd ${repoPath} && mvn test"
-                }  
+                }
             }
         }
-        
+
         stage('Artifact Construction') {
             steps {
                 script {
@@ -37,7 +37,7 @@ pipeline {
                 }
             }
         }
-         stage('Code Quality Check via SonarQube') {
+        stage('Code Quality Check via SonarQube') {
             steps {
                 script {
                     def repoPath = "achat"
@@ -49,15 +49,15 @@ pipeline {
                 }
             }
         }
-          stage('Publish To Nexus') {
+        stage('Publish To Nexus') {
             steps {
                 script {
                     sh 'cd achat && mvn deploy'
                 }
             }
         }
-          
-           stage('build images') {
+
+        stage('Build images') {
             steps {
                 script {
                     sh 'docker build -t zainebbouallagui/devops:backend .'
@@ -65,24 +65,26 @@ pipeline {
                 }
             }
         }
-         stage('push images to hub') {
+
+        stage('Push images to hub') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'dockerHub',variable: 'dockerHub')]) {
+                    withCredentials([string(credentialsId: 'dockerHub', variable: 'dockerHub')]) {
                         sh 'docker login -u zainebbouallagui -p ${dockerHub}'
                         sh 'docker push zainebbouallagui/devops:backend'
-                       
                     }
                 }
             }
-        } 
-         stage(' Docker Compose') {
+        }
+
+        stage('Docker Compose') {
             steps {
                 script {
-                    sh 'docker compose up -d '
+                    sh 'docker-compose up -d -f <compose-file>'
                 }
             }
-         }
+        }
+    }
     post {
         success {
             echo 'Le pipeline a réussi!'
