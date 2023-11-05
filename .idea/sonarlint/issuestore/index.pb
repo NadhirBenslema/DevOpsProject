@@ -107,3 +107,8 @@ Lsrc/main/java/tn/esprit/rh/achat/controllers/CategorieProduitController.java,c
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 e
 5src/test/java/tn/esprit/rh/achat/FournisseurTest.java,a\f\afe418a5e4b0952a0b67e331f812fe9f0123c4d4
+:
+
+Dockerfile,6\6\6651ddff6eb82c840ced7c1dddee15c6e1913dd4
+B
+docker-compose.yml,3\5\35b8c13cf2eb2a194eada000eb310d65aed53b2a
