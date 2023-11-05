@@ -93,8 +93,8 @@ public class FactureTest {
 
     @Test
     void testPourcentageRecouvrement() {
-        Date startDate = new Date(); // Set a valid start date
-        Date endDate = new Date();   // Set a valid end date
+        Date startDate = new Date();
+        Date endDate = new Date();
 
         when(factureService.pourcentageRecouvrement(startDate, endDate)).thenReturn(0.75f);
 
