@@ -10,11 +10,21 @@ pipeline {
                 ])
             }
         }
-        stage('Compilation du projet') {
-            steps {
-                sh 'mvn clean compile'
-            }
-        }
+         stage('Maven Clean') {
+                    steps {
+                        sh 'mvn clean'
+                    }
+                }
+         stage('Maven Compile') {
+                    steps {
+                        sh 'mvn compile'
+                    }
+                }
+        stage('sonarqube') {
+                    steps {
+                        sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonarqube'
+                    }
+                }
     }
     post {
         success {
