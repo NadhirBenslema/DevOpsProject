@@ -2,7 +2,7 @@
 FROM openjdk:11-jre-slim
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /achat
 
 # Copy the executable JAR file and any other necessary files
 COPY target/achat-1.0.jar .
