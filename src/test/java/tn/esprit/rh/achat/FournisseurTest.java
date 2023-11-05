@@ -28,10 +28,7 @@ public class FournisseurTest {
     @Mock
     private DetailFournisseurRepository detailFournisseurRepository;
 
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
+    
 
 
 
