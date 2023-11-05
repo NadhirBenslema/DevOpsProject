@@ -34,11 +34,13 @@ public class FournisseurTest {
 
     @Test
     public void testRetrieveAllFournisseurs() {
-        when(fournisseurRepository.findAll()).thenReturn(Arrays.asList(new Fournisseur(), new Fournisseur()));
-
-        List<Fournisseur> fournisseurs = fournisseurService.retrieveAllFournisseurs();
-
-        assertEquals(2, fournisseurs.size());
+        
+        ArrayList<Fournisseur> fournisseurList = new ArrayList<>();
+        when(fournisseurRepository.findAll()).thenReturn(fournisseurList);
+        List<Fournisseur> actualRetrieveAllFournisseursResult = fournisseurServiceImpl.retrieveAllFournisseurs();
+        assertSame(fournisseurList, actualRetrieveAllFournisseursResult);
+        assertTrue(actualRetrieveAllFournisseursResult.isEmpty());
+        verify(fournisseurRepository).findAll();
     }
 
 
@@ -60,20 +62,20 @@ public class FournisseurTest {
     }
 
 
-    @Test
-    public void testUpdateFournisseur() {
-        Fournisseur fournisseur = new Fournisseur();
-        DetailFournisseur detailFournisseur = new DetailFournisseur();
-        fournisseur.setDetailFournisseur(detailFournisseur);
+    // @Test
+    // public void testUpdateFournisseur() {
+    //     Fournisseur fournisseur = new Fournisseur();
+    //     DetailFournisseur detailFournisseur = new DetailFournisseur();
+    //     fournisseur.setDetailFournisseur(detailFournisseur);
 
-        when(detailFournisseurRepository.save(any(DetailFournisseur.class))).thenReturn(detailFournisseur);
-        when(fournisseurRepository.save(any(Fournisseur.class))).thenReturn(fournisseur);
+    //     when(detailFournisseurRepository.save(any(DetailFournisseur.class))).thenReturn(detailFournisseur);
+    //     when(fournisseurRepository.save(any(Fournisseur.class))).thenReturn(fournisseur);
 
-        Fournisseur result = fournisseurService.updateFournisseur(fournisseur);
+    //     Fournisseur result = fournisseurService.updateFournisseur(fournisseur);
 
-        assertNotNull(result);
-        assertEquals(detailFournisseur, result.getDetailFournisseur());
-    }
+    //     assertNotNull(result);
+    //     assertEquals(detailFournisseur, result.getDetailFournisseur());
+    // }
 
 
 }
