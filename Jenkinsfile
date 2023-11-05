@@ -60,7 +60,7 @@ pipeline {
         stage('Build images') {
             steps {
                 script {
-                    sh 'docker build -t zainebbouallagui/devops:backend .'
+                    sh 'sudo docker build -t zainebbouallagui/devops:backend . '
                     sh 'docker pull mysql:latest'
                 }
             }
