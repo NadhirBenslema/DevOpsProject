@@ -57,7 +57,13 @@ pipeline {
             }
         }
           
-        
+              stage('Building Our Image') {
+            steps {
+                script {
+                    sh 'cd achat && docker build -t zainebbouallagui-achat .'
+                }
+            }
+        }
     }
     post {
         success {
