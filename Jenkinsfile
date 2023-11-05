@@ -57,14 +57,32 @@ pipeline {
             }
         }
           
-              stage('Building Our Image') {
+           stage('build images') {
             steps {
                 script {
-                    sh 'cd achat && docker build -t zainebbouallagui-achat .'
+                    sh 'docker build -t zainebbouallagui/devops:backend .'
+                    sh 'docker pull mysql:latest'
                 }
             }
         }
-    }
+         stage('push images to hub') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'dockerHub',variable: 'dockerHub')]) {
+                        sh 'docker login -u zainebbouallagui -p ${dockerHub}'
+                        sh 'docker push zainebbouallagui/devops:backend'
+                       
+                    }
+                }
+            }
+        } 
+         stage(' Docker Compose') {
+            steps {
+                script {
+                    sh 'docker compose up -d '
+                }
+            }
+         }
     post {
         success {
             echo 'Le pipeline a réussi!'
