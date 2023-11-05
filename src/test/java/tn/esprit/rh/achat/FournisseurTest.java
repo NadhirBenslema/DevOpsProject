@@ -1,9 +1,11 @@
 package tn.esprit.rh.achat;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import tn.esprit.rh.achat.entities.DetailFournisseur;
 import tn.esprit.rh.achat.entities.Fournisseur;
@@ -12,6 +14,10 @@ import tn.esprit.rh.achat.repositories.FournisseurRepository;
 
 import tn.esprit.rh.achat.services.FournisseurServiceImpl;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -28,20 +34,25 @@ public class FournisseurTest {
     @Mock
     private DetailFournisseurRepository detailFournisseurRepository;
 
-    
 
 
+
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testRetrieveAllFournisseurs() {
-        
-        ArrayList<Fournisseur> fournisseurList = new ArrayList<>();
-        when(fournisseurRepository.findAll()).thenReturn(fournisseurList);
-        List<Fournisseur> actualRetrieveAllFournisseursResult = fournisseurServiceImpl.retrieveAllFournisseurs();
-        assertSame(fournisseurList, actualRetrieveAllFournisseursResult);
-        assertTrue(actualRetrieveAllFournisseursResult.isEmpty());
-        verify(fournisseurRepository).findAll();
+        // Simuler la récupération de la liste de fournisseurs
+        when(fournisseurRepository.findAll()).thenReturn(Arrays.asList(new Fournisseur(), new Fournisseur()));
+
+        List<Fournisseur> fournisseurs = fournisseurService.retrieveAllFournisseurs();
+
+        assertEquals(2, fournisseurs.size());
     }
+
 
 
 
@@ -62,20 +73,20 @@ public class FournisseurTest {
     }
 
 
-    // @Test
-    // public void testUpdateFournisseur() {
-    //     Fournisseur fournisseur = new Fournisseur();
-    //     DetailFournisseur detailFournisseur = new DetailFournisseur();
-    //     fournisseur.setDetailFournisseur(detailFournisseur);
+     @Test
+     public void testUpdateFournisseur() {
+         Fournisseur fournisseur = new Fournisseur();
+         DetailFournisseur detailFournisseur = new DetailFournisseur();
+         fournisseur.setDetailFournisseur(detailFournisseur);
 
-    //     when(detailFournisseurRepository.save(any(DetailFournisseur.class))).thenReturn(detailFournisseur);
-    //     when(fournisseurRepository.save(any(Fournisseur.class))).thenReturn(fournisseur);
+         when(detailFournisseurRepository.save(any(DetailFournisseur.class))).thenReturn(detailFournisseur);
+         when(fournisseurRepository.save(any(Fournisseur.class))).thenReturn(fournisseur);
 
-    //     Fournisseur result = fournisseurService.updateFournisseur(fournisseur);
+         Fournisseur result = fournisseurService.updateFournisseur(fournisseur);
 
-    //     assertNotNull(result);
-    //     assertEquals(detailFournisseur, result.getDetailFournisseur());
-    // }
+         assertNotNull(result);
+         assertEquals(detailFournisseur, result.getDetailFournisseur());
+     }
 
 
 }
