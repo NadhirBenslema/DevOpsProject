@@ -80,7 +80,7 @@ pipeline {
         stage('Docker Compose') {
             steps {
                 script {
-                    sh 'docker-compose up -d -f <compose-file>'
+                    sh 'docker-compose up -d '
                 }
             }
         }
