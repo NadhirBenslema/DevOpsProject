@@ -28,7 +28,21 @@ public class FournisseurTest {
     @Mock
     private DetailFournisseurRepository detailFournisseurRepository;
 
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
 
+
+
+    @Test
+    public void testRetrieveAllFournisseurs() {
+        when(fournisseurRepository.findAll()).thenReturn(Arrays.asList(new Fournisseur(), new Fournisseur()));
+
+        List<Fournisseur> fournisseurs = fournisseurService.retrieveAllFournisseurs();
+
+        assertEquals(2, fournisseurs.size());
+    }
 
 
 
@@ -40,16 +54,28 @@ public class FournisseurTest {
         DetailFournisseur detailFournisseur = new DetailFournisseur();
         fournisseur.setDetailFournisseur(detailFournisseur);
 
-        // Définissez le comportement attendu des mocks
         when(detailFournisseurRepository.save(any(DetailFournisseur.class))).thenReturn(detailFournisseur);
         when(fournisseurRepository.save(any(Fournisseur.class))).thenReturn(fournisseur);
 
-        // Appelez la méthode à tester
         Fournisseur result = fournisseurService.addFournisseur(fournisseur);
 
-        // Vérifiez que la méthode renvoie le résultat attendu
         assertNotNull(result);
-        // ... autres assertions
+    }
+
+
+    @Test
+    public void testUpdateFournisseur() {
+        Fournisseur fournisseur = new Fournisseur();
+        DetailFournisseur detailFournisseur = new DetailFournisseur();
+        fournisseur.setDetailFournisseur(detailFournisseur);
+
+        when(detailFournisseurRepository.save(any(DetailFournisseur.class))).thenReturn(detailFournisseur);
+        when(fournisseurRepository.save(any(Fournisseur.class))).thenReturn(fournisseur);
+
+        Fournisseur result = fournisseurService.updateFournisseur(fournisseur);
+
+        assertNotNull(result);
+        assertEquals(detailFournisseur, result.getDetailFournisseur());
     }
 
 
