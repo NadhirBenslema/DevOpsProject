@@ -1,13 +1,9 @@
 package tn.esprit.rh.achat;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -30,26 +26,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes = {FournisseurServiceImpl.class})
 @ExtendWith(SpringExtension.class)
 public class FournisseurTest {
 
-    @Mock
+
+
+
+    @MockBean
     private FournisseurRepository fournisseurRepository;
 
-    @Mock
+    @MockBean
     private DetailFournisseurRepository detailFournisseurRepository;
 
-    @InjectMocks
+    @Autowired
     private FournisseurServiceImpl fournisseurService;
 
 
 
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
 
 
 
@@ -63,6 +57,10 @@ public class FournisseurTest {
         assertTrue(actualRetrieveAllFournisseursResult.isEmpty());
         verify(fournisseurRepository).findAll();
     }
+
+
+
+
 
 
     @Test
