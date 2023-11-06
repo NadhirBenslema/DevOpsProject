@@ -71,7 +71,10 @@
 			<version>0.8.11</version>
 			<scope>test</scope>
 		</dependency>
-
+	<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+		</dependency>
 
 	</dependencies>
 	<!-- Deploy to Nexus -->
