@@ -1,56 +1,62 @@
 package tn.esprit.rh.achat;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import tn.esprit.rh.achat.entities.DetailFournisseur;
 import tn.esprit.rh.achat.entities.Fournisseur;
+
 import tn.esprit.rh.achat.repositories.DetailFournisseurRepository;
 import tn.esprit.rh.achat.repositories.FournisseurRepository;
 
 import tn.esprit.rh.achat.services.FournisseurServiceImpl;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
+@ContextConfiguration(classes = {FournisseurServiceImpl.class})
+@ExtendWith(SpringExtension.class)
 public class FournisseurTest {
 
-    @InjectMocks
-    private FournisseurServiceImpl fournisseurService;
 
-    @Mock
+
+
+    @MockBean
     private FournisseurRepository fournisseurRepository;
 
-    @Mock
+    @MockBean
     private DetailFournisseurRepository detailFournisseurRepository;
 
+    @Autowired
+    private FournisseurServiceImpl fournisseurService;
 
 
 
 
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
+
 
     @Test
     public void testRetrieveAllFournisseurs() {
-        // Simuler la récupération de la liste de fournisseurs
-        when(fournisseurRepository.findAll()).thenReturn(Arrays.asList(new Fournisseur(), new Fournisseur()));
 
-        List<Fournisseur> fournisseurs = fournisseurService.retrieveAllFournisseurs();
-
-        assertEquals(2, fournisseurs.size());
+        ArrayList<Fournisseur> fournisseurList = new ArrayList<>();
+        when(fournisseurRepository.findAll()).thenReturn(fournisseurList);
+        List<Fournisseur> actualRetrieveAllFournisseursResult = fournisseurService.retrieveAllFournisseurs();
+        assertSame(fournisseurList, actualRetrieveAllFournisseursResult);
+        assertTrue(actualRetrieveAllFournisseursResult.isEmpty());
+        verify(fournisseurRepository).findAll();
     }
 
 
@@ -87,6 +93,13 @@ public class FournisseurTest {
          assertNotNull(result);
          assertEquals(detailFournisseur, result.getDetailFournisseur());
      }
+
+    @Test
+    void testDeleteFournisseur() {
+        doNothing().when(fournisseurRepository).deleteById((Long) any());
+        fournisseurService.deleteFournisseur(123L);
+        verify(fournisseurRepository).deleteById((Long) any());
+    }
 
 
 }

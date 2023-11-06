@@ -68,8 +68,8 @@ import java.util.List;
 	@Override
 	public Fournisseur retrieveFournisseur(Long fournisseurId) {
 
-<span class="nc" id="L71">		Fournisseur fournisseur = fournisseurRepository.findById(fournisseurId).orElse(null);</span>
-<span class="nc" id="L72">		return fournisseur;</span>
+<span class="nc" id="L71">		return  fournisseurRepository.findById(fournisseurId).orElse(null);</span>
+
 	}
 
 	@Override
