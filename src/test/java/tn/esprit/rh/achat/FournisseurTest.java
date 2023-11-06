@@ -1,6 +1,6 @@
 package tn.esprit.rh.achat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 
@@ -24,8 +24,10 @@ import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes = {FournisseurServiceImpl.class})
 @ExtendWith(SpringExtension.class)
@@ -45,11 +47,8 @@ public class FournisseurTest {
 
 
 
-
-
-
     @Test
-    public void testRetrieveAllFournisseurs() {
+     void testRetrieveAllFournisseurs() {
 
         ArrayList<Fournisseur> fournisseurList = new ArrayList<>();
         when(fournisseurRepository.findAll()).thenReturn(fournisseurList);
@@ -65,7 +64,7 @@ public class FournisseurTest {
 
 
     @Test
-    public void testAddFournisseur() {
+     void testAddFournisseur() {
         Fournisseur fournisseur = new Fournisseur();
         DetailFournisseur detailFournisseur = new DetailFournisseur();
         fournisseur.setDetailFournisseur(detailFournisseur);
@@ -80,7 +79,7 @@ public class FournisseurTest {
 
 
      @Test
-     public void testUpdateFournisseur() {
+      void testUpdateFournisseur() {
          Fournisseur fournisseur = new Fournisseur();
          DetailFournisseur detailFournisseur = new DetailFournisseur();
          fournisseur.setDetailFournisseur(detailFournisseur);
