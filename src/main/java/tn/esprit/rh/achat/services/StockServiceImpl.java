@@ -17,11 +17,12 @@ public class StockServiceImpl implements IStockService {
 	@Autowired
 	StockRepository stockRepository;
 
-    public StockServiceImpl(StockRepository repository) {
-    }
+	public StockServiceImpl(StockRepository stockRepository) {
+		this.stockRepository = stockRepository;
+	}
 
 
-    @Override
+	@Override
 	public List<Stock> retrieveAllStocks() {
 		// récuperer la date à l'instant t1
 		log.info("In method retrieveAllStocks");
