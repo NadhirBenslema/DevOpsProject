@@ -18,7 +18,6 @@ public class StockServiceImpl implements IStockService {
 	StockRepository stockRepository;
 
 	public StockServiceImpl(StockRepository stockRepository) {
-		this.stockRepository = stockRepository;
 	}
 
 
