@@ -1,9 +1,13 @@
 package tn.esprit.rh.achat;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -31,20 +35,21 @@ import static org.mockito.Mockito.*;
 @ExtendWith(SpringExtension.class)
 public class FournisseurTest {
 
-
-
-
-    @MockBean
+    @Mock
     private FournisseurRepository fournisseurRepository;
 
-    @MockBean
+    @Mock
     private DetailFournisseurRepository detailFournisseurRepository;
 
-    @Autowired
+    @InjectMocks
     private FournisseurServiceImpl fournisseurService;
 
 
 
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
 
 
 
@@ -58,10 +63,6 @@ public class FournisseurTest {
         assertTrue(actualRetrieveAllFournisseursResult.isEmpty());
         verify(fournisseurRepository).findAll();
     }
-
-
-
-
 
 
     @Test
@@ -95,7 +96,7 @@ public class FournisseurTest {
      }
 
     @Test
-    void testDeleteFournisseur() {
+    public void testDeleteFournisseur() {
         doNothing().when(fournisseurRepository).deleteById((Long) any());
         fournisseurService.deleteFournisseur(123L);
         verify(fournisseurRepository).deleteById((Long) any());
