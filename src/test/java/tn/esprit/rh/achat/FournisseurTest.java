@@ -73,6 +73,48 @@ public class FournisseurTest {
     }
 
 
+    @Test
+    void testAddFournisseur() {
+        Fournisseur fournisseur = new Fournisseur();
+        DetailFournisseur detailFournisseur = new DetailFournisseur();
+        fournisseur.setDetailFournisseur(detailFournisseur);
+
+        when(detailFournisseurRepository.save(any(DetailFournisseur.class))).thenReturn(detailFournisseur);
+        when(fournisseurRepository.save(any(Fournisseur.class))).thenReturn(fournisseur);
+
+        Fournisseur result = fournisseurService.addFournisseur(fournisseur);
+
+        assertNotNull(result);
+    }
+
+
+
+
+    @Test
+    void testUpdateFournisseur() {
+        Fournisseur fournisseur = new Fournisseur();
+        DetailFournisseur detailFournisseur = new DetailFournisseur();
+        fournisseur.setDetailFournisseur(detailFournisseur);
+
+        when(detailFournisseurRepository.save(any(DetailFournisseur.class))).thenReturn(detailFournisseur);
+        when(fournisseurRepository.save(any(Fournisseur.class))).thenReturn(fournisseur);
+
+        Fournisseur result = fournisseurService.updateFournisseur(fournisseur);
+
+        assertNotNull(result);
+        assertEquals(detailFournisseur, result.getDetailFournisseur());
+    }
+
+
+    @Test
+    void testDeleteFournisseur() {
+        doNothing().when(fournisseurRepository).deleteById((Long) any());
+        fournisseurService.deleteFournisseur(123L);
+        verify(fournisseurRepository).deleteById((Long) any());
+    }
+
+
+
 
 
 
