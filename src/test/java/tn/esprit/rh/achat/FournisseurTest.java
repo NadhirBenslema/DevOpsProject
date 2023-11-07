@@ -12,10 +12,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import tn.esprit.rh.achat.entities.DetailFournisseur;
 import tn.esprit.rh.achat.entities.Fournisseur;
 
-import tn.esprit.rh.achat.repositories.DetailFournisseurRepository;
-import tn.esprit.rh.achat.repositories.FournisseurRepository;
+import tn.esprit.rh.achat.repositories.*;
 
 import tn.esprit.rh.achat.services.FournisseurServiceImpl;
+import tn.esprit.rh.achat.services.ReglementServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +41,21 @@ public class FournisseurTest {
     @MockBean
     private DetailFournisseurRepository detailFournisseurRepository;
 
+    @MockBean
+    private ProduitRepository produitRepository;
+
+    @MockBean
+    private SecteurActiviteRepository secteurActiviteRepository;
+
+    @MockBean
+    private FactureRepository factureRepository;
+
+    @MockBean
+    private DetailFactureRepository detailFactureRepository;
+
+    @MockBean
+    private OperateurRepository operateurRepository;
+
     @Autowired
     private FournisseurServiceImpl fournisseurService;
 
@@ -61,43 +76,6 @@ public class FournisseurTest {
 
 
 
-/*
-    @Test
-     void testAddFournisseur() {
-        Fournisseur fournisseur = new Fournisseur();
-        DetailFournisseur detailFournisseur = new DetailFournisseur();
-        fournisseur.setDetailFournisseur(detailFournisseur);
 
-        when(detailFournisseurRepository.save(any(DetailFournisseur.class))).thenReturn(detailFournisseur);
-        when(fournisseurRepository.save(any(Fournisseur.class))).thenReturn(fournisseur);
-
-        Fournisseur result = fournisseurService.addFournisseur(fournisseur);
-
-        assertNotNull(result);
-    }
-
-
-     @Test
-      void testUpdateFournisseur() {
-         Fournisseur fournisseur = new Fournisseur();
-         DetailFournisseur detailFournisseur = new DetailFournisseur();
-         fournisseur.setDetailFournisseur(detailFournisseur);
-
-         when(detailFournisseurRepository.save(any(DetailFournisseur.class))).thenReturn(detailFournisseur);
-         when(fournisseurRepository.save(any(Fournisseur.class))).thenReturn(fournisseur);
-
-         Fournisseur result = fournisseurService.updateFournisseur(fournisseur);
-
-         assertNotNull(result);
-         assertEquals(detailFournisseur, result.getDetailFournisseur());
-     }
-
-    @Test
-    void testDeleteFournisseur() {
-        doNothing().when(fournisseurRepository).deleteById((Long) any());
-        fournisseurService.deleteFournisseur(123L);
-        verify(fournisseurRepository).deleteById((Long) any());
-    }
-*/
 
 }
