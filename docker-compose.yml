@@ -16,7 +16,7 @@ services:
     depends_on:
       - mysqldb
     build: ./
-    image: aymenmz/achat:1.0.0
+    image: aymenmzoughi/achat:1.0.0
     ports:
       - 8089:8089
     environment:
