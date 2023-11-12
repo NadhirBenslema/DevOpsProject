@@ -147,6 +147,95 @@ public class FournisseurTest {
 
 
 
+    @Test
+    void testRetrieveFournisseurByCode() {
+        String code = "exampleCode";
+        List<Fournisseur> fournisseurs = new ArrayList<>();
+        when(fournisseurRepository.findFournisseursByCode(code)).thenReturn(fournisseurs);
+
+        List<Fournisseur> result = fournisseurService.retrieveFournisseurByCode(code);
+        assertEquals(fournisseurs, result);
+    }
+
+    // Test retrieveFournisseurByLibelle
+    @Test
+    void testRetrieveFournisseurByLibelle() {
+        String libelle = "exampleLibelle";
+        List<Fournisseur> fournisseurs = new ArrayList<>();
+        when(fournisseurRepository.findFournisseursByLibelle(libelle)).thenReturn(fournisseurs);
+        List<Fournisseur> result = fournisseurService.retrieveFournisseurByLibelle(libelle);
+        assertEquals(fournisseurs, result);
+    }
+
+
+    @Test
+    void testRetrieveFournisseurByCategory() {
+        String category = "exampleCategory";
+        List<Fournisseur> fournisseurs = new ArrayList<>();
+        when(fournisseurRepository.findFournisseursByCategorieFournisseur(category)).thenReturn(fournisseurs);
+        List<Fournisseur> result = fournisseurService.retrieveFournisseurByCategory(category);
+        assertEquals(fournisseurs, result);
+    }
+
+    @Test
+    void testRetrieveFournisseurByDetail() {
+        Long id = 1L;
+        Fournisseur fournisseur = new Fournisseur();
+        when(fournisseurRepository.findFournisseurByDetailFournisseurIdDetailFournisseur(id)).thenReturn(fournisseur);
+        Fournisseur result = fournisseurService.retrieveFournisseurByDetail(id);
+        assertEquals(fournisseur, result);
+    }
+
+
+
+    // Test retrieveAllDetailsFournisseurs
+    @Test
+    void testRetrieveAllDetailsFournisseurs() {
+        List<DetailFournisseur> expectedDetailFournisseurs = new ArrayList<>();
+        // Ajoutez des détails fournisseurs fictifs à la liste expectedDetailFournisseurs
+
+        when(detailFournisseurRepository.findAll()).thenReturn(expectedDetailFournisseurs);
+
+        List<DetailFournisseur> result = fournisseurService.retrieveAllDetailsFournisseurs();
+        assertEquals(expectedDetailFournisseurs, result);
+    }
+
+    // Test deleteDetailFournisseur
+    @Test
+    void testDeleteDetailFournisseur() {
+        Long id = 1L;
+
+        fournisseurService.deleteDetailFournisseur(id);
+        verify(detailFournisseurRepository).deleteById(id);
+    }
+
+    // Test updateDetailFournisseur
+    @Test
+    void testUpdateDetailFournisseur() {
+        Long id = 1L;
+        DetailFournisseur existingDetail = new DetailFournisseur(); // Créez un objet existant simulé
+        DetailFournisseur updatedDetail = new DetailFournisseur(); // Créez un objet mis à jour simulé
+
+        when(detailFournisseurRepository.findById(id)).thenReturn(Optional.of(existingDetail));
+        when(detailFournisseurRepository.save(existingDetail)).thenReturn(updatedDetail);
+
+        DetailFournisseur result = fournisseurService.updateDetailFournisseur(updatedDetail, id);
+        assertEquals(updatedDetail, result);
+    }
+
+    // Test retrieveDetailFournisseur
+    @Test
+    void testRetrieveDetailFournisseur() {
+        Long id = 1L;
+        DetailFournisseur expectedDetail = new DetailFournisseur(); // Créez un détail fictif attendu
+
+        when(detailFournisseurRepository.findById(id)).thenReturn(Optional.of(expectedDetail));
+
+        DetailFournisseur result = fournisseurService.retrieveDetailFournisseur(id);
+        assertEquals(expectedDetail, result);
+    }
+
+
   /*  @Test
     void testAssignSecteurActiviteToFournisseur() {
         Fournisseur fournisseur = new Fournisseur();

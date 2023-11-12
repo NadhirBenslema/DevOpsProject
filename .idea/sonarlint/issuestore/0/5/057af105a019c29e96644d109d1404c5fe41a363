@@ -1,5 +1,9 @@
 
-f
-java:S2259O"IA "NullPointerException" could be thrown; "fournisseur" is nullable here.(‰²õ8áš¬®¹1
+g
+java:S2259‡"IA "NullPointerException" could be thrown; "fournisseur" is nullable here.(‰²õ8¼•èƒ»1
+Y
+java:S3655q"7Call "Optional#isPresent()" before accessing the value.(Å›Ü”üÿÿÿÿ8°ı‘†»1
 I
-java:S1905 "'Remove this unnecessary cast to "List".(óæË¸øÿÿÿÿ8êš¬®¹1
+java:S1905 "'Remove this unnecessary cast to "List".(óæË¸øÿÿÿÿ8Æ•èƒ»1
+D
+java:S1905a"'Remove this unnecessary cast to "List".(Ñ¼‰É8ˆ§…»1
