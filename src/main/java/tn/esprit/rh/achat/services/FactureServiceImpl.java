@@ -31,6 +31,7 @@ public class FactureServiceImpl implements IFactureService {
 
 	@Override
 	public List<Facture> retrieveAllFactures() {
+		log.info("Entering retrieveAllFactures method.");
 		List<Facture> factures = (List<Facture>) factureRepository.findAll();
 		for (Facture facture : factures) {
 			log.info(" facture : " + facture);
@@ -40,6 +41,7 @@ public class FactureServiceImpl implements IFactureService {
 
 	
 	public Facture addFacture(Facture f) {
+		log.info("Entering addFacture method with parameter: {}", f);
 		return factureRepository.save(f);
 	}
 
@@ -48,6 +50,8 @@ public class FactureServiceImpl implements IFactureService {
 	 * ainsi que les montants d'une facture
 	 */
 	private Facture addDetailsFacture(Facture f, Set<DetailFacture> detailsFacture) {
+		log.info("Entering addDetailsFacture method with parameters: {} and {}", f, detailsFacture);
+        float montantFacture = 0;
 		float montantFacture = 0;
 		float montantRemise = 0;
 		for (DetailFacture detail : detailsFacture) {
@@ -68,23 +72,26 @@ public class FactureServiceImpl implements IFactureService {
 		}
 		f.setMontantFacture(montantFacture);
 		f.setMontantRemise(montantRemise);
+		log.info("Details added to facture: {}", f);
 		return f;
 	}
 
 	@Override
 	public void cancelFacture(Long factureId) {
+		log.info("Entering cancelFacture method with parameter: {}", factureId);
 		// Méthode 01
 		//Facture facture = factureRepository.findById(factureId).get();
 		Facture facture = factureRepository.findById(factureId).orElse(new Facture());
 		facture.setArchivee(true);
 		factureRepository.save(facture);
+		log.info("Facture canceled: {}", facture);
 		//Méthode 02 (Avec JPQL)
 		factureRepository.updateFacture(factureId);
 	}
 
 	@Override
 	public Facture retrieveFacture(Long factureId) {
-
+		log.info("Entering retrieveFacture method with parameter: {}", factureId);
 		Facture facture = factureRepository.findById(factureId).orElse(null);
 		log.info("facture :" + facture);
 		return facture;
@@ -92,23 +99,29 @@ public class FactureServiceImpl implements IFactureService {
 
 	@Override
 	public List<Facture> getFacturesByFournisseur(Long idFournisseur) {
+		log.info("Entering getFacturesByFournisseur method with parameter: {}", idFournisseur);
 		Fournisseur fournisseur = fournisseurRepository.findById(idFournisseur).orElse(null);
+		log.info("Retrieving factures for fournisseur {}: {}", idFournisseur, factures);
 		return (List<Facture>) fournisseur.getFactures();
 	}
 
 	@Override
 	public void assignOperateurToFacture(Long idOperateur, Long idFacture) {
+		log.info("Entering assignOperateurToFacture method with parameters: {} and {}", idOperateur, idFacture);
 		Facture facture = factureRepository.findById(idFacture).orElse(null);
 		Operateur operateur = operateurRepository.findById(idOperateur).orElse(null);
 		operateur.getFactures().add(facture);
 		operateurRepository.save(operateur);
+		log.info("Assigned operateur {} to facture {}", idOperateur, idFacture);
 	}
 
 	@Override
 	public float pourcentageRecouvrement(Date startDate, Date endDate) {
+		log.info("Entering pourcentageRecouvrement method with parameters: {} and {}", startDate, endDate);
 		float totalFacturesEntreDeuxDates = factureRepository.getTotalFacturesEntreDeuxDates(startDate,endDate);
 		float totalRecouvrementEntreDeuxDates =reglementServiceIml.getChiffreAffaireEntreDeuxDate(startDate,endDate);
 		float pourcentage=(totalRecouvrementEntreDeuxDates/totalFacturesEntreDeuxDates)*100;
+		log.info("Pourcentage recouvrement calculated: {}%", pourcentage);
 		return pourcentage;
 	}
 	
