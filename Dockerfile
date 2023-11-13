@@ -7,4 +7,4 @@ ENV NEXUS_REPO_URL=http://192.168.1.27:8081/repository/maven-releases/tn/esprit/
 # Download the JAR file from Nexus and copy it to the container
 RUN curl -L -o achat.jar -u $NEXUS_USERNAME:$NEXUS_PASSWORD $NEXUS_REPO_URL
 
-ENTRYPOINT ["java","-jar","acaht.jar"]
+ENTRYPOINT ["java","-jar","achat.jar"]
