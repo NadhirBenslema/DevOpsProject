@@ -11,7 +11,7 @@ services:
   logstash:
     image: docker.elastic.co/logstash/logstash:7.10.0
     volumes:
-      - ./logstash/config:/usr/share/logstash/config
+      - /home/vagrant/logstash/config:/usr/share/logstash/config
     command: logstash -f /usr/share/logstash/config/logstash.conf
     depends_on:
       - elasticsearch
