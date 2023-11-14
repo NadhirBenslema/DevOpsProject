@@ -48,7 +48,7 @@ services:
       context: ./
       args:
         - "BUILD_NO_CACHE=--no-cache"
-    image: aymenmz/AchatSpringL:1.0.0
+    image: aymenmz/achatspringl:1.0.0
     ports:
       - 8089:8089
     environment:
