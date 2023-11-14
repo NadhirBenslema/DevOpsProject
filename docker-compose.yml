@@ -43,6 +43,7 @@ services:
     container_name: achatback
     depends_on:
       - mysqldb
+      - logstash
     build: 
       context: ./
       args:
