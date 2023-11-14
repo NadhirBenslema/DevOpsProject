@@ -46,7 +46,7 @@ services:
       - logstash
     build: 
       context: ./
-    image: aymenmz/achatspringl:1.0.0
+    image: aymenmz/achatsp:1.0.0
     ports:
       - 8089:8089
     environment:
