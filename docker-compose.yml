@@ -9,7 +9,7 @@ services:
       - 9200:9200  # Add port binding for Elasticsearch
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:7.10.0
+    image: docker.elastic.co/logstash/logstash:7.4.0
     volumes:
       - /home/vagrant/logstash/config:/usr/share/logstash/config
     command: logstash -f /usr/share/logstash/config/logstash.conf
