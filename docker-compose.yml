@@ -61,6 +61,7 @@ services:
       }'
     volumes:
       - .m2:/root/.m2
+      - /home/vagrant/logstash/config:/usr/share/logstash/config
     stdin_open: true
     tty: true
 
