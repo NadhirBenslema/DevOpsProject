@@ -1,8 +1,12 @@
 <configuration>
+    <!-- Other configurations -->
+
     <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <destination>192.168.2.2:5044</destination>
-        <!-- Customize other Logstash appender properties if needed -->
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
     </appender>
+
+    <!-- Other configurations -->
 
     <root level="info">
         <appender-ref ref="LOGSTASH"/>

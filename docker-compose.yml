@@ -40,13 +40,13 @@ services:
       - db:/var/lib/mysql
 
   achat:
-    container_name: achatspring
+    container_name: achatcontainer
     depends_on:
       - mysqldb
       - logstash
     build: 
       context: ./
-    image: aymenmz/achatsp:1.0.0
+    image: aymenmz/achatapp:1.0.0
     ports:
       - 8089:8089
     environment:
