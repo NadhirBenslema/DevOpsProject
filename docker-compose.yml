@@ -40,14 +40,12 @@ services:
       - db:/var/lib/mysql
 
   achat:
-    container_name: achatback
+    container_name: achatspring
     depends_on:
       - mysqldb
       - logstash
     build: 
       context: ./
-      args:
-        - "BUILD_NO_CACHE=--no-cache"
     image: aymenmz/achatspringl:1.0.0
     ports:
       - 8089:8089
