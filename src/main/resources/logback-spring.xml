@@ -1,15 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>192.168.2.2:5044</destination>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <mdc />
+                <context />
+                <logLevel />
+                <loggerName />
+                <pattern>
+                   <pattern>
+    {
+        "timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",
+        "level": "%level",
+        "logger": "%logger{35}",
+        "message": "%msg",
+        "exception": "%ex{full}"
+    }
+</pattern>
 
-    <!-- Appender to log to console -->
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{35} - %msg%n</pattern>
+                </pattern>
+                <threadName />
+                <message />
+                <logstashMarkers />
+                <stackTrace />
+            </providers>
         </encoder>
     </appender>
-
-    <!-- Set the root logger level and attach appenders -->
     <root level="info">
-        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="logstash" />
     </root>
-
 </configuration>
