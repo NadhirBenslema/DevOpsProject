@@ -85,7 +85,11 @@
 			<artifactId>logstash-logback-encoder</artifactId>
 			<version>7.4</version>
 		</dependency>
-
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3z</version>
+		</dependency>
 
 	</dependencies>
 	<!-- Deploy to Nexus -->
