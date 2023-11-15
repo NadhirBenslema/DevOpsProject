@@ -33,8 +33,8 @@ services:
     image: docker.elastic.co/logstash/logstash:8.3.3
     container_name: logstash_springboot
     volumes:
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - ./logstash/config:/usr/share/logstash/pipeline:ro
+      - ./logstash/config:/usr/share/logstash/config:ro
+
     ports:
       - "5044:5044"
       - "5000:5000/tcp"
@@ -46,6 +46,7 @@ services:
       - elastic
     depends_on:
       - elasticsearch
+
 
   mysqldb:
     image: mysql:5.7
