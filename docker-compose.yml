@@ -14,6 +14,7 @@ services:
       - db:/var/lib/mysql
     networks:
       - mynetwork
+
   backend:
     image: backend
     depends_on:
@@ -33,11 +34,13 @@ services:
       - ./m2:/root/.m2
     networks:
       - mynetwork
-    node_exporter:
+
+  node_exporter:
     image: prom/node-exporter:latest
     restart: unless-stopped
     ports:
-      - 9100:9100   
+      - 9100:9100
+
 networks:
   mynetwork:
     driver: bridge
