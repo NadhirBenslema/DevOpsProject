@@ -14,6 +14,14 @@ pipeline {
                 sh 'mvn clean compile'
             }
         }
+
+        stage('Analyse SonarQube') {
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.login=alamadara1998'
+            }
+        }
+
+
     }
     post {
         success {
