@@ -25,11 +25,10 @@ pipeline {
         }
 
 
-        stage('JUNIT/Mockito') {
+        stage('Unit Tests + Mockito') {
             steps {
                 script {
-                    // Étape de compilation et d'exécution des tests Maven
-                    sh 'mvn clean test'
+                    sh 'mvn test'
                 }
             }
         }
