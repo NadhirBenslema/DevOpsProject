@@ -1,13 +1,12 @@
 pipeline {
     agent any
+
     stages {
-
         stage('Récupération du code source') {
-                steps {
-                    git branch: 'Ala', url: 'https://github.com/AymenMzoughi/DevOpsProject.git'
-                }
+            steps {
+                git branch: 'Ala', url: 'https://github.com/AymenMzoughi/DevOpsProject.git'
             }
-
+        }
 
         stage('Compilation du projet') {
             steps {
@@ -15,14 +14,17 @@ pipeline {
             }
         }
 
-            stage('SonarQube analysis') {
-                withSonarQubeEnv(installationName: 'sq1') {
-                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.3:sonar'
-
-                }}
-
-
+        stage('SonarQube analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv(installationName: 'sq1') {
+                        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.3:sonar'
+                    }
+                }
+            }
+        }
     }
+
     post {
         success {
             echo 'Le pipeline a réussi!'
