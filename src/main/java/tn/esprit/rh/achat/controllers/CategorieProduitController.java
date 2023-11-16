@@ -2,15 +2,18 @@ package tn.esprit.rh.achat.controllers;
 
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.rh.achat.entities.CategorieProduit;
 import tn.esprit.rh.achat.services.ICategorieProduitService;
 
-import java.util.List;
+import java.util.*;
+
 
 @RestController
-@Api(tags = "Gestion des categories Produit")
+@Api(tags = "Gestion des categorie produit")
 @RequestMapping("/categorieProduit")
+@CrossOrigin("http://localhost:4200")
 public class CategorieProduitController {
 
 	@Autowired

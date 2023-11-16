@@ -1,8 +1,7 @@
 package tn.esprit.rh.achat.entities;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +22,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Facture implements Serializable {
+
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -44,5 +45,4 @@ public class Facture implements Serializable {
     @JsonIgnore
     private Set<Reglement> reglements;
 
-	
 }

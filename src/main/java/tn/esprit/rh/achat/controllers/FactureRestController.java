@@ -3,12 +3,16 @@ package tn.esprit.rh.achat.controllers;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.rh.achat.entities.DetailFacture;
 import tn.esprit.rh.achat.entities.Facture;
 import tn.esprit.rh.achat.services.IFactureService;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -77,6 +81,24 @@ public class FactureRestController {
         }
     }
 
-    
+    @GetMapping("/{factureId}/details")
+    public Set<DetailFacture> getDetailsForFacture(@PathVariable Long factureId) {
+        return factureService.getDetailsForFacture(factureId);
+    }
+
+    @DeleteMapping("/{factureId}")
+    public String deleteFacture(@PathVariable Long factureId) {
+        // Check if facture exists
+        Facture existingFacture = factureService.retrieveFacture(factureId);
+        if (existingFacture == null) {
+            return "Facture not found";
+        }
+
+        // Delete the facture
+        factureService.deleteFacture(factureId);
+
+        return "Facture deleted successfully";
+    }
+
 
 }

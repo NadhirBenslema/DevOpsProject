@@ -26,8 +26,8 @@ public class FactureServiceImpl implements IFactureService {
 	FournisseurRepository fournisseurRepository;
 	@Autowired
 	ProduitRepository produitRepository;
-    @Autowired
-    ReglementServiceImpl reglementServiceIml;
+	@Autowired
+	ReglementServiceImpl reglementServiceIml;
 
 	@Override
 	public List<Facture> retrieveAllFactures() {
@@ -39,7 +39,7 @@ public class FactureServiceImpl implements IFactureService {
 		return factures;
 	}
 
-	
+
 	public Facture addFacture(Facture f) {
 		log.info("Entering addFacture method with parameter: {}", f);
 		return factureRepository.save(f);
@@ -51,10 +51,10 @@ public class FactureServiceImpl implements IFactureService {
 	 */
 	private Facture addDetailsFacture(Facture f, Set<DetailFacture> detailsFacture) {
 		log.info("Entering addDetailsFacture method with parameters: {} and {}", f, detailsFacture);
-        float montantFacture = 0;
+		float montantFacture = 0;
 		float montantRemise = 0;
 		for (DetailFacture detail : detailsFacture) {
-			//Récuperer le produit 
+			//Récuperer le produit
 			Produit produit = produitRepository.findById(detail.getProduit().getIdProduit()).get();
 			//Calculer le montant total pour chaque détail Facture
 			float prixTotalDetail = detail.getQteCommandee() * produit.getPrix();
@@ -98,12 +98,12 @@ public class FactureServiceImpl implements IFactureService {
 
 	@Override
 	public List<Facture> getFacturesByFournisseur(Long idFournisseur) {
-        log.info("Entering getFacturesByFournisseur method with parameter: {}", idFournisseur);
-        Fournisseur fournisseur = fournisseurRepository.findById(idFournisseur).orElse(null);
-        List<Facture> factures = (List<Facture>) fournisseur.getFactures();
-        log.info("Retrieving factures for fournisseur {}: {}", idFournisseur, factures);
-        return factures;
-    }
+		log.info("Entering getFacturesByFournisseur method with parameter: {}", idFournisseur);
+		Fournisseur fournisseur = fournisseurRepository.findById(idFournisseur).orElse(null);
+		List<Facture> factures = (List<Facture>) fournisseur.getFactures();
+		log.info("Retrieving factures for fournisseur {}: {}", idFournisseur, factures);
+		return factures;
+	}
 
 	@Override
 	public void assignOperateurToFacture(Long idOperateur, Long idFacture) {
@@ -124,6 +124,31 @@ public class FactureServiceImpl implements IFactureService {
 		log.info("Pourcentage recouvrement calculated: {}%", pourcentage);
 		return pourcentage;
 	}
-	
+	@Override
+	public Set<DetailFacture> getDetailsForFacture(Long factureId) {
+		log.info("Getting details for facture with ID: {}", factureId);
 
+		// Retrieve the facture from the repository
+		Facture facture = factureRepository.findById(factureId)
+				.orElse(null);
+
+		// Retrieve details associated with the facture
+		Set<DetailFacture> detailsFacture = facture.getDetailsFacture();
+
+		log.info("Details retrieved for facture with ID {}: {}", factureId, detailsFacture);
+		return detailsFacture;
+	}
+
+	public void deleteFacture(Long factureId) {
+		log.info("Entering deleteFacture method with parameter: {}", factureId);
+
+		// Check if facture exists
+		Facture existingFacture = factureRepository.findById(factureId).orElse(null);
+		if (existingFacture != null) {
+			factureRepository.delete(existingFacture);
+			log.info("Facture with ID {} deleted successfully.", factureId);
+		} else {
+			log.warn("Facture with ID {} not found. Unable to delete.", factureId);
+		}
+	}
 }
