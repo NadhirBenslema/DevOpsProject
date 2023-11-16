@@ -15,11 +15,10 @@ pipeline {
             }
         }
 
-        stage('Analyse SonarQube') {
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.login=alamadara1998'
-            }
-        }
+            stage('SonarQube analysis') {
+                withSonarQubeEnv(installationName: 'sq1') {
+                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.3:sonar'
+    }
 
 
     }
