@@ -23,6 +23,20 @@ pipeline {
                 }
             }
         }
+
+
+        stage('JUNIT/Mockito') {
+            steps {
+                script {
+                    // Étape de compilation et d'exécution des tests Maven
+                    sh 'mvn clean test'
+                }
+            }
+        }
+
+
+
+
     }
 
     post {
