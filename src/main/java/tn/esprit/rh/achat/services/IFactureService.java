@@ -25,4 +25,5 @@ public interface IFactureService {
 	Set<DetailFacture> getDetailsForFacture(Long factureId);
 	void deleteFacture(Long factureId);
 
+	void assignFournisseurToFacture(Long idFournisseur, Long idFacture);
 }

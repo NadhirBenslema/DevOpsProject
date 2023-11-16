@@ -18,7 +18,7 @@ import java.util.Set;
 @RestController
 @Api(tags = "Gestion des factures")
 @RequestMapping("/facture")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("http://192.168.2.2:4200")
 public class FactureRestController {
 
     @Autowired
@@ -100,5 +100,9 @@ public class FactureRestController {
         return "Facture deleted successfully";
     }
 
-
+    @PutMapping("/assignFournisseurToFacture/{idFournisseur}/{idFacture}")
+    public void assignFournisseurToFacture(@PathVariable("idFournisseur") Long idFournisseur,
+                                           @PathVariable("idFacture") Long idFacture) {
+        factureService.assignFournisseurToFacture(idFournisseur, idFacture);
+    }
 }

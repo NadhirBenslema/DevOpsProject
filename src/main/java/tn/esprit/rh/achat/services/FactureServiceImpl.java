@@ -115,6 +115,7 @@ public class FactureServiceImpl implements IFactureService {
 		log.info("Assigned operateur {} to facture {}", idOperateur, idFacture);
 	}
 
+
 	@Override
 	public float pourcentageRecouvrement(Date startDate, Date endDate) {
 		log.info("Entering pourcentageRecouvrement method with parameters: {} and {}", startDate, endDate);
@@ -149,6 +150,17 @@ public class FactureServiceImpl implements IFactureService {
 			log.info("Facture with ID {} deleted successfully.", factureId);
 		} else {
 			log.warn("Facture with ID {} not found. Unable to delete.", factureId);
+		}
+	}
+
+@Override
+	public void assignFournisseurToFacture(Long idFournisseur, Long idFacture) {
+		Facture facture = factureRepository.findById(idFacture).orElse(null);
+		Fournisseur fournisseur = fournisseurRepository.findById(idFournisseur).orElse(null);
+
+		if (facture != null && fournisseur != null) {
+			facture.setFournisseur(fournisseur);
+			factureRepository.save(facture);
 		}
 	}
 }
