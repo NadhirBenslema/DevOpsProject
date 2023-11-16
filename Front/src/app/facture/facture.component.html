@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture Details</title>
+</head>
+
+<body>
+    <div><br></div>
+    <div class="container mt-5 mb-5">
+
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div *ngFor="let f of facture">
+                        <div class="text-left logo p-2 px-5">
+                            <img src="https://logopond.com/logos/7dbd707ec8e4652a86563df294cc589b.png" width="250">
+                        </div>
+                        
+                        <div class="invoice p-5">
+                            <div class="d-flex justify-content-between footer p-3">
+                                <span (click)="navigateToListFacture()">
+                                    <i class="fa fa-arrow-left" style="color: #000000;" style="cursor: pointer;"></i>
+                                </span>
+                            </div>
+                            
+                            <h5>Votre commande est validé!</h5>
+                            <span class="font-weight-bold d-block mt-4">Bonjour, Chris</span>
+                            <span>Votre Commande à été validé et ceci est votre facture,</span>
+                            <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr *ngFor="let f of facture">
+                                            <td>
+                                                <div class="py-2">
+                                                    <span class="d-block text-muted">Ref</span>
+                                                    <span>{{f.idFacture}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="py-2">
+                                                    <span class="d-block text-muted">Archivee</span>
+                                                    <span>{{f.archivee}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="py-2">
+                                                    <span class="d-block text-muted">Date Creation</span>
+                                                    <span>{{f.dateCreationFacture}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="py-2">
+                                                    <span class="d-block text-muted">Date Modification</span>
+                                                    <span>{{f.dateDerniereModificationFacture}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="py-2">
+                                                    <span class="d-block text-muted">Libelle Fournisseur</span>
+                                                    <span>{{f.fournisseur?.libelle}}</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="product border-bottom table-responsive">
+                                <table class="table table-borderless">
+
+                                    <tbody>
+                                        <tr>
+                                            <td width="20%">
+
+                                                <img src="https://i.imgur.com/u11K1qd.jpg" width="90">
+
+                                            </td>
+
+                                            <td width="60%">
+                                                <span class="font-weight-bold">Men's Sports cap</span>
+                                                <div class="product-qty">
+                                                    <span class="d-block">Quantity:1</span>
+                                                    <span>Color:Dark</span>
+
+                                                </div>
+                                            </td>
+                                            <td width="20%">
+                                                <div class="text-right">
+                                                    <span class="font-weight-bold">$67.50</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td width="20%">
+
+                                                <img src="https://i.imgur.com/SmBOua9.jpg" width="70">
+
+                                            </td>
+
+                                            <td width="60%">
+                                                <span class="font-weight-bold">Men's Collar T-shirt</span>
+                                                <div class="product-qty">
+                                                    <span class="d-block">Quantity:1</span>
+                                                    <span>Color:Orange</span>
+
+                                                </div>
+                                            </td>
+                                            <td width="20%">
+                                                <div class="text-right">
+                                                    <span class="font-weight-bold">$77.50</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+                            <div class="row d-flex justify-content-end">
+                                <div class="col-md-5">
+                                    <table class="table table-borderless">
+                                        <tbody class="totals">
+                                            <tr>
+                                                <td>
+                                                    <div class="text-left">
+                                                        <span class="text-muted">Pourcentage Remise</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-right">
+                                                        <span>%{{f.detailsFacture[0]?.pourcentageRemise !== undefined ?
+                                                            f.detailsFacture[0].pourcentageRemise : 'N/A'}}</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="text-left">
+                                                        <span class="text-muted">Montant Remise</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-right">
+                                                        <span class="text-success">${{f.detailsFacture[0]?.montantRemise
+                                                            !== undefined ? f.detailsFacture[0].montantRemise :
+                                                            'N/A'}}</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="border-top border-bottom">
+                                                <td>
+                                                    <div class="text-left">
+                                                        <span class="font-weight-bold">Prix total</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-right">
+                                                        <span
+                                                            class="font-weight-bold">${{f.detailsFacture[0]?.prixTotalDetail
+                                                            !== undefined ? f.detailsFacture[0].prixTotalDetail :
+                                                            'N/A'}}</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <p class="font-weight-bold mb-0">Merci d'avoir commander chez nous</p>
+                            <span>Achat Team</span>
+                        </div>
+                        <div class="d-flex justify-content-between footer p-3">
+                            <span>Need Help? visit our <a href="#"> help center</a></span>
+                            <span>12 June, 2020</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div><br></div>
+</body>
+
+</html>
