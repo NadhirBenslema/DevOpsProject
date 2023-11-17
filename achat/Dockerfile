@@ -3,10 +3,10 @@ FROM openjdk:11-jre-slim
 
 EXPOSE 8089
 # Set the working directory in the container
-WORKDIR /achat
+#WORKDIR /achat
 
 # Copy the executable JAR file and any other necessary files
-COPY target/achat-1.0.jar /achat/
+COPY target/achat-1.0.jar achat-1.0.jar
 
 
 
