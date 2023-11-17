@@ -17,7 +17,7 @@ services:
     container_name: achatcont
     depends_on:
       - mysqldb
-      - logstash
+
     build: 
       context: ./
     image: aymenmz/achatappspring:1.0.0
@@ -33,8 +33,7 @@ services:
       }'
     volumes:
       - .m2:/root/.m2
-      - /home/vagrant/logstash/config:/usr/share/logstash/config
-      - /src/main:/usr/share/logstash/config
+
     stdin_open: true
     tty: true
 
