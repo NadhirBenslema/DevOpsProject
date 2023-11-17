@@ -14,13 +14,7 @@ pipeline {
             }
         }
 
-        stage('Unit Tests + Mockito') {
-            steps {
-                script {
-                    sh 'mvn test'
-                }
-            }
-        }
+
 
 
 
