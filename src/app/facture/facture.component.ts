@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class FactureComponent implements OnInit {
 
   facture: any[] = [];
-  apiUrl = 'http://localhost:8089/SpringMVC/facture'; 
+  apiUrl = 'http://192.168.2.2:8089/SpringMVC/facture'; 
   factureId: string | null = null;
   constructor(private http: HttpClient,private route: ActivatedRoute,private router: Router) { }
 
@@ -23,7 +23,7 @@ export class FactureComponent implements OnInit {
 
   getFactureDetails(factureId: string | null): void {
     if (factureId) {
-      this.http.get<any>(`http://localhost:8089/SpringMVC/facture/retrieve-facture/${factureId}`)
+      this.http.get<any>(`http://192.168.2.2:8089/SpringMVC/facture/retrieve-facture/${factureId}`)
         .subscribe(
           facture => {
             this.facture = [facture]; // Wrap the single object in an array

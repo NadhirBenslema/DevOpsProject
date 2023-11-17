@@ -16,7 +16,7 @@ export class AddFactureComponent implements OnInit {
    
   };
   fournisseurs: any[] = [];
-  apiUrl = 'http://localhost:8089/SpringMVC/';
+  apiUrl = 'http://192.168.2.2:8089/SpringMVC/';
 
   constructor(private http: HttpClient, private router: Router) { }
 

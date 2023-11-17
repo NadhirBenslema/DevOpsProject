@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 })
 export class ListFactureComponent implements OnInit {
   factures: any[] | undefined; // You may need to create a TypeScript interface to represent the Facture model
-   apiUrl = 'http://localhost:8089/SpringMVC/facture'; 
-   apiUrlF = 'http://localhost:8089/SpringMVC'; 
+   apiUrl = 'http://192.168.2.2:8089/SpringMVC/facture'; 
+   apiUrlF = 'http://192.168.2.2:8089/SpringMVC'; 
    showModal = false;
    fournisseursList: any[] = [];
    isEditing: boolean = false;
