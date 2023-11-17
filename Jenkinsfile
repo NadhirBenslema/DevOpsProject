@@ -14,7 +14,11 @@ pipeline {
             }
         }
 
-
+         stage('UNIT test'){
+            steps{
+                sh 'mvn test'
+            }
+        }
 
 
                   stage('Docker build')
@@ -36,7 +40,7 @@ pipeline {
 
 
 
-              stage('Push') {
+              stage('Push docker hub') {
 
                 steps {
                     sh 'docker push alabh/achat'
