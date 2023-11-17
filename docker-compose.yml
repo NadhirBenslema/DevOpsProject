@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  
+  mysqldb:
+    image: mysql:5.7
+    container_name: mysqldb
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=achat
+    ports:
+      - 3307:3306
+    volumes:
+      - db:/var/lib/mysql
+
+  achat:
+    container_name: achatcont
+    depends_on:
+      - mysqldb
+      - logstash
+    build: 
+      context: ./
+    image: aymenmz/achatappspring:1.0.0
+    ports:
+      - 8089:8089
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url":"jdbc:mysql://mysqldb:3306/achatdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&createDatabaseIfNotExist=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+        "spring.datasource.username" : "root",
+        "spring.datasource.password" :  "",
+        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
+        "spring.jpa.hibernate.ddl-auto" : "update"
+      }'
+    volumes:
+      - .m2:/root/.m2
+      - /home/vagrant/logstash/config:/usr/share/logstash/config
+      - /src/main:/usr/share/logstash/config
+    stdin_open: true
+    tty: true
+
+  angularapp:  
+    container_name: angularcont
+    build:
+      context: ./
+    ports:
+      - 4200:4200
+    stdin_open: true
+    tty: true
+
+networks:
+  elastic:
+    driver: bridge
+
+volumes:
+  elasticsearch_data:
+    driver: local
+  db:
