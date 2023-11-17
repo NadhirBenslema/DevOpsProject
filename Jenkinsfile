@@ -14,12 +14,34 @@ pipeline {
             }
         }
 
-         stage('UNIT test'){
+
+
+        stage('SonarQube analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv(installationName: 'sq1') {
+                        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.4.0.905:sonar'
+                    }
+                }
+            }
+        }
+
+
+
+         stage('JUNIT/Mock test'){
             steps{
                 sh 'mvn test'
             }
         }
 
+
+
+        stage('Nexus'){
+
+             steps{
+                 sh 'mvn deploy '
+             }
+         }
 
                   stage('Docker build')
                 {
@@ -58,15 +80,7 @@ pipeline {
 
 
 
-                        stage('SonarQube analysis') {
-                            steps {
-                                script {
-                                    withSonarQubeEnv(installationName: 'sq1') {
-                                        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.4.0.905:sonar'
-                                    }
-                                }
-                            }
-                        }
+
 
     }
 
