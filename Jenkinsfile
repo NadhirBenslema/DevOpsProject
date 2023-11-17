@@ -14,18 +14,13 @@ pipeline {
             }
         }
 
-
-
-
         stage('Unit Tests + Mockito') {
             steps {
                 script {
-                        sh 'mvn -Dhttps.protocols=TLSv1.2 test'                }
+                    sh 'mvn test'
+                }
             }
         }
-
-
-
 
 
 
@@ -40,6 +35,12 @@ pipeline {
             }
         }
 
+        stage('Nexus'){
+
+                     steps{
+                         sh 'mvn deploy '
+                     }
+                 }
 
 
 
