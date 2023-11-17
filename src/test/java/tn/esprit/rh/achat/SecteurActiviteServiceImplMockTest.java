@@ -7,8 +7,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import tn.esprit.rh.achat.entities.SecteurActivite;
 import tn.esprit.rh.achat.repositories.SecteurActiviteRepository;
@@ -25,14 +28,14 @@ import java.util.List;
 import java.util.Optional;
 
 
-@SpringBootTest
+@ContextConfiguration(classes = {SecteurActiviteServiceImpl.class})
 @ExtendWith(SpringExtension.class)
 public class SecteurActiviteServiceImplMockTest {
 
-    @Mock
+    @MockBean
     SecteurActiviteRepository SecteurRepository;
 
-    @InjectMocks
+    @Autowired
     SecteurActiviteServiceImpl SecteurService;
 
     @Test
