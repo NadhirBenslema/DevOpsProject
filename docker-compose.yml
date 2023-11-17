@@ -12,7 +12,7 @@ services:
     volumes:
       - db:/var/lib/mysql
   app:
-    container_name: alabh/achat
+    container_name: alabhcont
     depends_on:
       - mysqldb
     build: ./
