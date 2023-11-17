@@ -17,17 +17,40 @@ pipeline {
 
 
 
-
-
-
-
                   stage('Docker build')
                 {
                     steps {
-                         sh 'docker build -t alabh .'
+                         sh 'docker build -t alabh/achat .'
                     }
                 }
 
+
+
+               stage('Docker login')
+               {
+                   steps {
+                       sh 'echo $dockerhub_PSW | docker login -u alabh -p alamadara1998'
+                   }
+
+               }
+
+
+
+              stage('Push') {
+
+                steps {
+                    sh 'docker push alabh/achat'
+                }
+            }
+
+                    stage('DockerCompose') {
+
+                       steps {
+                                sh 'cd /var/lib/jenkins/workspace/benhamida'
+								sh 'docker-compose up -d'
+                        }
+
+                        }
 
 
 
