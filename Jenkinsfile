@@ -19,15 +19,7 @@ pipeline {
 
 
 
-        stage('SonarQube analysis') {
-            steps {
-                script {
-                    withSonarQubeEnv(installationName: 'sq1') {
-                        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.4.0.905:sonar'
-                    }
-                }
-            }
-        }
+
 
                   stage('Docker build')
                 {
@@ -35,6 +27,19 @@ pipeline {
                          sh 'docker build -t alabh .'
                     }
                 }
+
+
+
+
+                        stage('SonarQube analysis') {
+                            steps {
+                                script {
+                                    withSonarQubeEnv(installationName: 'sq1') {
+                                        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.4.0.905:sonar'
+                                    }
+                                }
+                            }
+                        }
 
     }
 
