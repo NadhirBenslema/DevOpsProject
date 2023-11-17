@@ -36,7 +36,7 @@ public class SecteurActiviteServiceImplMockTest {
     SecteurActiviteServiceImpl SecteurService;
 
     @Test
-    public void RetrieveSecteurActiviteTest() {
+     void RetrieveSecteurActiviteTest() {
 
         SecteurActivite s1 = new SecteurActivite(1L, "11111","BUREATIQUE",null);
         s1.setIdSecteurActivite(1L);
@@ -49,7 +49,7 @@ public class SecteurActiviteServiceImplMockTest {
 
     }
     @Test
-    public void AddSecteurActiviteTest()
+     void AddSecteurActiviteTest()
     {
 
         SecteurActivite s2 = new SecteurActivite(null,"22222","INFORMATIQUE",null);
@@ -61,7 +61,7 @@ public class SecteurActiviteServiceImplMockTest {
 
     }
     @Test
-    public void getAllSecteursTest()
+     void getAllSecteursTest()
     {
         List<SecteurActivite> SecteurList = new ArrayList<SecteurActivite>() {
 
@@ -78,7 +78,7 @@ public class SecteurActiviteServiceImplMockTest {
     }
 
     @Test
-    public void DeleteSecteurTest(){
+     void DeleteSecteurTest(){
 
         SecteurActivite se1 = new SecteurActivite(null,"33333","CASANIER",null);
         se1.setIdSecteurActivite(7L);
