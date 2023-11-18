@@ -55,7 +55,7 @@ pipeline {
                stage('Docker login')
                {
                    steps {
-                       sh 'echo $dockerhub_PSW | docker login -u alabh -p alamadara1998'
+                       sh 'echo $dockerhub_PSW | docker login -u username -p password'
                    }
 
                }
